@@ -5,30 +5,41 @@
  * @author (Pedro Mendes % João Baptista) 
  * @version (um número da versão ou uma data)
  */
-public class WordGuessingGame
-{
-  /**
+public class WordGuessingGame {
+   /**
    * Atributos da classe WordGuessingGame
    * 
    */
-  String hiddenWord = "abc";
-  String guessedWord = "___";
+  String hiddenWord;
+  String guessedWord;
   int numberOfTries;
   InputReader reader;
-  
+  WordGenerator wordGenerator;
   /**
    * Construtor da classe WordGuessingGame
-   * @param hiddenWord, representa a palavra que se pretende adivinhar
-   * @param guessedWord, representa a palavra que se vai adivinhando
+   * @param wordGenerator, um objeto WordGenerator para gerar a palavra oculta
    * @param numberOfTries, para contabilizar o número de tentativas
    */
-  public WordGuessingGame(String hiddenWord, String guessedWord,
+  public WordGuessingGame(WordGenerator wordGenerator,
   int numberOfTries, InputReader reader){
-      this.hiddenWord = hiddenWord;
-      this.guessedWord = guessedWord;
+      this.wordGenerator = wordGenerator;
+      this.hiddenWord = wordGenerator.generateWord(); // Gerar a palavra escondida usando o WordGenerator
+      this.guessedWord = initializeGuessedWord(); // Inicializar a palavra adivinhada
       this.numberOfTries = numberOfTries;
       this.reader = reader;
   }
+  /**
+     * Inicializa a palavra que está sendo adivinhada com "_" em todas as posições.
+     *
+     * @return A palavra inicializada.
+     */
+    private String initializeGuessedWord() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < hiddenWord.length(); i++) {
+            sb.append("_");
+        }
+        return sb.toString();
+    }
   /**
    * Métodos seletores da classe WordGuessingGame
    */
@@ -39,7 +50,6 @@ public class WordGuessingGame
   public String getGuessedWord(){
       return guessedWord;
   }
-  
   /**
    * Método que retorna a palavra que se pretende adivinhar
    */
@@ -74,14 +84,15 @@ public class WordGuessingGame
    * Analisa se a letra fornecida pelo utilizador está correta
    */
   private boolean guess(char letter){
-      
+      boolean letterCorrect = false;
       for (int i = 0 ; i < hiddenWord.length();i++) {
-              if (letter == hiddenWord.charAt(i)){
+              if (letter == hiddenWord.charAt(i) && guessedWord.charAt(i) == '_'){
                   guessedWord = changeCharInPosition(i, letter, guessedWord);
+                  letterCorrect = true;
               }
         }
      
-      return hiddenWord.equals(guessedWord);
+      return letterCorrect;
     }
     
     /**
@@ -107,19 +118,17 @@ private void showResult(){
 public void play(){
     showWelcome();
     showGuessedWord();
- 
-        while (guess(reader.getChar(""))== false){
-            guess(reader.getChar(""));
-            showGuessedWord();
+
+    while (!guessedWord.equals(hiddenWord)) {
+        char letter = reader.getChar("");
+        if (!guess(letter)) {
             numberOfTries++;
-            
-            if (guessedWord.equals(hiddenWord)){
-                break;
-            }
         }
-   showGuessedWord();
-   showResult();
+        showGuessedWord();
+    }
 
+    showResult();
 }
-
-  }
+    
+    
+}
