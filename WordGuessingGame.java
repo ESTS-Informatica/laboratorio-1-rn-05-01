@@ -19,6 +19,7 @@ public class WordGuessingGame {
    * Construtor da classe WordGuessingGame
    * @param wordGenerator, um objeto WordGenerator para gerar a palavra oculta
    * @param numberOfTries, para contabilizar o número de tentativas
+   * @param reader, Um objeto InputReader para receber entrada do utilizador.
    */
   public WordGuessingGame(WordGenerator wordGenerator,
   int numberOfTries, InputReader reader){
