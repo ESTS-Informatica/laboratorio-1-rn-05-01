@@ -131,10 +131,14 @@ public void play(){
     showResult();
 }
 
-public void reset(){
+
+    /**
+     * Método reset para reinicializar os seguintes atributos
+     */
+    public void reset(){
     hiddenWord = wordGenerator.generateWord();
     guessedWord = initializeGuessedWord();
-    
+    numberOfTries=0;
     
 }
     

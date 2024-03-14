@@ -28,7 +28,7 @@ public class FullGame {
     public FullGame() {
         WordGenerator wordGenerator = new WordGenerator();
         reader = new InputReader();
-        int numberOfTries = 10;
+        int numberOfTries = 0;
         wordGuessingGame = new WordGuessingGame(wordGenerator, numberOfTries, reader);
     }
 
