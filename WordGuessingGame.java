@@ -130,6 +130,44 @@ public void play(){
 
     showResult();
 }
+
+public void reset(){
+    hiddenWord = wordGenerator.generateWord();
+    guessedWord = initializeGuessedWord();
     
     
+}
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
