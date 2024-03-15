@@ -3,7 +3,7 @@
  * Escreva uma descrição da classe FullGame aqui.
  * 
  * @author (Pedro Mendes % João Baptista) 
- * @version (um número da versão ou uma data)
+ * @version 15/03/24 07h42m
  */
  
 public class FullGame {
@@ -20,16 +20,13 @@ public class FullGame {
 
     /**
    * Construtor da classe FullGame
-   * @param wordGenerator, um objeto WordGenerator para gerar a palavra oculta
+   * @param wordGenerator, um objeto WordGuessingGame jogo para adivinhar palavras
    * @param reader, Um objeto InputReader para receber entrada do utilizador.
-   * @param numberOfTries, para contabilizar o número de tentativas
-   * @param wordGuessingGame,um obejecto WordGenerator para iniciar o jogo 
-   */
-    public FullGame() {
-        WordGenerator wordGenerator = new WordGenerator();
-        reader = new InputReader();
-        int numberOfTries = 0;
-        wordGuessingGame = new WordGuessingGame(wordGenerator, numberOfTries, reader);
+      */
+    public FullGame(WordGuessingGame wordGuessingGame, InputReader reader) {
+        this.wordGuessingGame = wordGuessingGame;
+        this.reader = reader;
+      
     }
 
     
@@ -37,30 +34,32 @@ public class FullGame {
     
     
     /**
-    * Método para manter o jogo continuadamente até o jagador decidir parar de jogar
+    * Método para permitir que o jogador adivinhe mais palavras sem o jogo terminar.
     */public void playFullGame() {
-        boolean continuePlaying = true;
-        while (continuePlaying) {
-            
+        char playAgain = 's';
+        
+        while (playAgain == 's' || playAgain =='S'){
+            wordGuessingGame.reset();
             wordGuessingGame.play();
-            System.out.println("Deseja jogar novamente? (s/n)");
-            char choice = reader.getChar("");
-            if (choice != 's' && choice != 'S') {
-                continuePlaying = false;
-                
-            }else
-            {
-                wordGuessingGame.reset();
-                    
-            }
+            
+            System.out.println("Quer continuar a jogar? (s/n): ");
+            playAgain = reader.getChar("");
         }
+    
+      
+      
     }
    
     
-    
-    
+    /**
+     * Main
+     */
+   
     public static void main(String[] args) {
-        FullGame fullGame = new FullGame();
+       WordGenerator wordGenerator = new WordGenerator();
+        InputReader reader = new InputReader();
+        WordGuessingGame wordGame = new WordGuessingGame(wordGenerator, 0, reader);
+        FullGame fullGame = new FullGame(wordGame, reader);
         fullGame.playFullGame();
     }
 

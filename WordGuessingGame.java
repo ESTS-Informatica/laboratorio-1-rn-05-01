@@ -133,7 +133,8 @@ public void play(){
 
 
     /**
-     * Método reset para reinicializar os seguintes atributos
+     * Método que reinicializa o jogo, gerando uma nova palavra escondida
+     *,reinicializa a palavra adivinhada e redefine o número de tentativas para zero.
      */
     public void reset(){
     hiddenWord = wordGenerator.generateWord();
