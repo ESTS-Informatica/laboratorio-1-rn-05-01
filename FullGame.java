@@ -20,7 +20,7 @@ public class FullGame {
 
     /**
    * Construtor da classe FullGame
-   * @param wordGenerator, um objeto WordGuessingGame jogo para adivinhar palavras
+   * @param wordGuessingGame, um objeto WordGuessingGame jogo para adivinhar palavras
    * @param reader, Um objeto InputReader para receber entrada do utilizador.
       */
     public FullGame(WordGuessingGame wordGuessingGame, InputReader reader) {
